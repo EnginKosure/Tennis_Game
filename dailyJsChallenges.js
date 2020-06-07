@@ -22,3 +22,14 @@ fruits.getMatchingWords('lemon');     // must return []
 fruits.getMatchingWords('cherr??');   // must return []
 fruits.getMatchingWords('?a?a?a');    // must return ['banana', 'papaya']
 fruits.getMatchingWords('??????');    // must return ['banana', 'papaya', 'cherry']
+fruits.getMatchingWords('???')        // must return []
+
+// const a = 'some string'
+// const b = [...a]
+// console.log(b);//[ 's', 'o', 'm', 'e', ' ', 's', 't', 'r', 'i', 'n', 'g' ]
+
+
+Dictionary.prototype.getMatchingWords = function (pattern) {
+    pattern = new RegExp('^' + pattern.replace(/\?/g, '.') + '$');
+    return this.words.filter(pattern.test.bind(pattern));
+}
